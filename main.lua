@@ -29,7 +29,7 @@ for x = 0, circResolution - 1 do
 	for y = 0, circResolution - 1 do
 		local dist = math.sqrt( ( x - circResolution / 2 - 0.5 ) ^ 2 + ( y - circResolution / 2 - 0.5 ) ^ 2 )
 		local c = math.min( 1.2 - ( 2 * dist / circResolution ), 1 )
-		local col = dist < circResolution / 2 and { 255, 255, 255, 255 * c } or { 0, 0, 0, 0 }
+		local col = dist < circResolution / 2 and { 1, 1, 1, 1 * c } or { 0, 0, 0, 0 }
 
 		imageData1:setPixel( x, y, col )
 	end
@@ -141,7 +141,7 @@ local function newEnemyObject()
 
 	object.xv = xv
 	object.yv = yv
-	object.colour = { math.random() * 200, math.random() * 200, math.random() * 200 }
+	object.colour = { math.random() * 200/255, math.random() * 200/255, math.random() * 200/255 }
 
 	function object:draw()
 		love.graphics.setColor( self.colour )
@@ -170,7 +170,7 @@ local function newEnemyObject()
 	end
 end
 
-love.graphics.setBackgroundColor( 240, 240, 240 )
+love.graphics.setBackgroundColor( 240/255, 240/255, 240/255 )
 
 function love.update( dt )
 	local collisions = {}
@@ -224,7 +224,7 @@ function love.draw()
 		world[i]:draw()
 	end
 
-	love.graphics.setColor( 0, 0, 0, 240 )
+	love.graphics.setColor( 0, 0, 0, 240/255 )
 	love.graphics.setFont( font )
 	love.graphics.print( score, 0, 0 )
 
@@ -266,7 +266,7 @@ end
 player = newCircleObject( 0, 0, INITIAL_PLAYER_SIZE )
 
 function player:draw()
-	love.graphics.setColor( 40, 80, 240 )
+	love.graphics.setColor( 40/255, 80/255, 240/255 )
 	love.graphics.draw( image1, self.x - self.size, self.y - self.size, 0, 2 * self.size / circResolution, 2 * self.size / circResolution )
 end
 
